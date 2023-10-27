@@ -3,28 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="/lib/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="/css/home.css">
 </head>
 
 <body>
-<div id="myPlot" style="width:100%;max-width:700px"></div>
+<div class="menu">
 
-<script>
-    let exp = "Math.sin(x)";
+    <div class="logo">
+        <img src="/images/Logo.svg" alt="logo"/>
+        <div class="logo-name">
+            <h1>Channel Simulator</h1>
+            <p>Passa Faixas</p>
+        </div>
+    </div>
 
-    // Generate values
-    const xValues = [];
-    const yValues = [];
-    for (let x = 0; x <= 10; x += 0.1) {
-        xValues.push(x);
-        yValues.push(eval(exp));
-    }
+    <form>
 
-    // Display using Plotly
-    const data = [{x:xValues, y:yValues, mode:"lines"}];
-    const layout = {title: "y = " + exp};
-    Plotly.newPlot("myPlot", data, layout);
-</script>
+        <div class="form-control">
+            <label for="f1">Label</label>
+            <input type="number" name="f1" id="f1"/>
+        </div>
+        <div class="form-control">
+            <label for="f2">Label</label>
+            <input type="number" name="f2" id="f2"/>
+        </div>
+        <div class="form-control">
+            <label for="f3">Label</label>
+            <input type="number" name="f3" id="f3"/>
+        </div>
+    </form>
 
+    <div class="credits">
+        <p>Criado por:</p>
+        <div class="names">
+            <p>Dayane Damaceno</p>
+            <p>Duarte Barbosa</p>
+            <p>Guilherme Luiz</p>
+            <p>Wesley Oliveira</p>
+        </div>
+    </div>
+</div>
+<main>
+    <div id="graficoSinalEntrada" class="graphic"></div>
+    <div id="graficoAmplitudeEntrada" class="graphic"></div>
+    <div id="graficoFaseEntrada" class="graphic"></div>
+    <div id="graficoCanal" class="graphic"></div>
+    <div id="graficoSinalSaida" class="graphic"></div>
+    <div id="graficoAmplitudeSaida" class="graphic"></div>
+    <div id="graficoFaseSaida" class="graphic"></div>
+</main>
+
+<script src="/js/graphics.js"></script>
 </body>
 </html>

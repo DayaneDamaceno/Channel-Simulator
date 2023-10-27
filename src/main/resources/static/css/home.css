@@ -1,0 +1,145 @@
+/* Reset básico de CSS */
+
+/* Zera margens e preenchimentos para todos os elementos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Define uma fonte padrão e tamanho para o texto */
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    width: 100vw;
+}
+/* Reset de CSS para elementos de entrada (input) */
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input[type="date"],
+input[type="search"],
+textarea {
+    margin: 0;             /* Remove margens padrão */
+    padding: 0;            /* Remove preenchimentos padrão */
+    border: none; /* Adicione uma borda padrão para indicar o campo de entrada */
+    border-radius: 3px;    /* Adicione cantos arredondados (opcional) */
+    font-family: inherit;  /* Use a fonte padrão do sistema */
+    font-size: inherit;    /* Use o tamanho de fonte padrão do sistema */
+    box-sizing: border-box; /* Inclua preenchimento e borda no cálculo do tamanho */
+    background-color: #fff; /* Cor de fundo padrão */
+    color: #333;           /* Cor de texto padrão */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="date"]:focus,
+input[type="search"]:focus,
+textarea:focus {
+    outline: none;         /* Remova a borda de foco padrão (pode ser personalizada) */
+     /* Cor da borda quando em foco (exemplo: azul) */
+}
+
+
+/* Remove a decoração de links */
+a {
+    text-decoration: none;
+}
+
+/* Remove as marcas de lista e números de lista */
+ul, ol {
+    list-style: none;
+}
+
+/* Zera a aparência de botões */
+button, input[type="submit"] {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+body{
+    background:#FFF;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+.menu{
+    display: flex;
+    width: 269px;
+    height: 100vh;
+    padding: 24px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    flex-shrink: 0;
+    background: #1D1D20;
+    color: #fff;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.logo-name h1{
+    font-size: 16px;
+}
+.logo-name p{
+    font-size: 14px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+.form-control{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 4px;
+}
+.form-control input{
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 5px;
+    background: #29292D;
+    color: #fff;
+}
+.credits, .names{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+.names{
+    color: #82828C;
+    font-size: 14px;
+}
+
+main{
+    padding-left: 269px;
+    width: 100%;
+}
+.graphic{
+    width:100%;
+    max-width:700px;
+}

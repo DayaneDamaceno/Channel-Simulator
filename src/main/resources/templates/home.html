@@ -2,7 +2,8 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Simulator</title>
+    <link rel="shortcut icon" type="imagex/png" href="/images/Logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -24,34 +25,37 @@
     <form>
 
         <div class="form-control">
-            <label for="f1">Label</label>
-            <input type="number" name="f1" id="f1"/>
+            <label for="f1">Frequência do sinal</label>
+            <input type="number" name="f1" id="f1" onkeydown="atualizarSinalGrafico()" value="1" />
+        </div>
+
+        <div class="form-control">
+            <label for="f2">Frequência inicial do canal</label>
+            <input type="number" name="f2" id="f2" onkeydown="atualizarSinalGrafico()" value="1"/>
         </div>
         <div class="form-control">
-            <label for="f2">Label</label>
-            <input type="number" name="f2" id="f2"/>
-        </div>
-        <div class="form-control">
-            <label for="f3">Label</label>
-            <input type="number" name="f3" id="f3"/>
+            <label for="f3">Frequência final do canal</label>
+            <input type="number" name="f3" id="f3" onkeydown="atualizarSinalGrafico()" value="1"/>
         </div>
     </form>
 
     <div class="credits">
         <p>Criado por:</p>
         <div class="names">
-            <p>Dayane Damaceno</p>
-            <p>Duarte Barbosa</p>
-            <p>Guilherme Luiz</p>
-            <p>Wesley Oliveira</p>
+            <p>Dayane Damaceno  <a href="https://www.instagram.com/dayane.damaceno04/" target="_blank" ><img src="https://i.imgur.com/6aFrbRe_d.webp?maxwidth=760&fidelity=grand" style="width:20px;height:20px; float: Left; margin-right: 5px;"></a></p>
+            <p>Duarte Pires     <a href="https://www.instagram.com/_dbpires/" target="_blank" ><img src="https://i.imgur.com/6aFrbRe_d.webp?maxwidth=760&fidelity=grand" style="width:20px;height:20px; float: Left; margin-right: 5px;"></a></p>
+            <p>Guilherme Luiz   <a href="https://www.instagram.com/ghuil.uiz/" target="_blank" ><img src="https://i.imgur.com/6aFrbRe_d.webp?maxwidth=760&fidelity=grand" style="width:20px;height:20px; float: Left; margin-right: 5px;"></a></p>
+            <p>Wesley Oliveira  <a href="https://www.instagram.com/wesleysilva_1999/" target="_blank" ><img src="https://i.imgur.com/6aFrbRe_d.webp?maxwidth=760&fidelity=grand" style="width:20px;height:20px; float: Left; margin-right: 5px;"></a></p>
         </div>
     </div>
 </div>
+
 <main>
     <div id="graficoSinalEntrada" class="graphic"></div>
     <div id="graficoAmplitudeEntrada" class="graphic"></div>
     <div id="graficoFaseEntrada" class="graphic"></div>
-    <div id="graficoCanal" class="graphic"></div>
+    <div id="graficoAmpliCanal" class="graphic"></div>
+    <div id="graficoFaseCanal" class="graphic"></div>
     <div id="graficoSinalSaida" class="graphic"></div>
     <div id="graficoAmplitudeSaida" class="graphic"></div>
     <div id="graficoFaseSaida" class="graphic"></div>

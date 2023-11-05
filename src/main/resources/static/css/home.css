@@ -7,6 +7,13 @@
     box-sizing: border-box;
 }
 
+/* Oculta o botão up e down do input number */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 /* Define uma fonte padrão e tamanho para o texto */
 body {
     font-family: Arial, sans-serif;
@@ -141,5 +148,8 @@ main{
 }
 .graphic{
     width:100%;
-    max-width:700px;
+    max-width:900px;
+    height: 500px;
+    margin: auto;
+    justify-content: center;
 }

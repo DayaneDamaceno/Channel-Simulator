@@ -28,7 +28,7 @@ function iniciarGraficoAmplitudeEntrada(){
     const xArray1 = [0,0];
     const yArray1 = [0.63661,0];
 
-    const xArray2 = [1*f1,1*f1];
+    const xArray2 = [f1,f1];
     const yArray2 = [0,0.2122];
 
     const xArray3 = [2*f1,2*f1];

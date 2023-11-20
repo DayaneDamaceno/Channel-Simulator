@@ -142,9 +142,32 @@ form{
     font-size: 14px;
 }
 
-main{
+#loading, #content, #empty{
     padding-left: 269px;
     width: 100%;
+}
+#loading{
+    margin-top: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#loading img, #empty img{
+    height: 100px;
+}
+#empty{
+    margin: 8% auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#empty img{
+    height: 300px;
+}
+#empty p{
+    width: 300px;
+    text-align: center;
 }
 .graphic{
     width:100%;
@@ -152,4 +175,24 @@ main{
     height: 500px;
     margin: auto;
     justify-content: center;
+}
+.btn{
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    background: #007bff;
+    color: #FFFFFF;
+}
+.btn:hover{
+    background: #0060c9;
+}
+
+.visible-none{
+    visibility: hidden !important;
+}
+
+.d-none{
+    display: none !important;
 }

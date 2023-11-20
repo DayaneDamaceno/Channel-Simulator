@@ -1,9 +1,46 @@
+var notyf = new Notyf({
+    duration: 5000,
+    position: {
+        x: 'right',
+        y: 'top',
+    },});
+async function obterExpressao(grafic, frequencias) {
+    const params = criarQueryString(frequencias);
 
-function iniciarGraficoSinalEntrada(){
+    try {
+        const response = await fetch(`/expressao/${grafic}?${params}`);
+        if (!response.ok) {
+            console.log(response)
+            throw new Error('Erro ao chamar ao obter a expressão');
+        }
+        const data = await response.json();
+        console.log(grafic, data.expressao);
+        return data.expressao;
+    } catch (error) {
+        console.error(error);
+    }
+}
 
-    let f1 = parseFloat(document.querySelector("#f1").value);
+function criarQueryString(obj) {
+    var queryString = '';
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            if (queryString.length > 0) {
+                queryString += '&';
+            }
+            queryString += encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]);
+        }
+    }
+    return queryString;
+}
 
-    let exp = "Math.abs(Math.sin(2*Math.PI*" + f1 + "*x))";
+async function iniciarGraficoSinalEntrada() {
+
+    let frequencias = {
+        frequenciaDoSinal: parseFloat(document.querySelector("#f1").value)
+    }
+
+    let exp = await obterExpressao('sinal-entrada', frequencias);
 
     // Generate values
     const xValues = [];
@@ -14,9 +51,9 @@ function iniciarGraficoSinalEntrada(){
     }
 
     // Display using Plotly
-    const data = [{x:xValues, y:yValues, mode:"lines"}];
-    const layout = { title: "Sinal de Entrada",};
-    Plotly.newPlot("graficoSinalEntrada", data, layout, {displayModeBar:false, scrollZoom: true});
+    const data = [{x: xValues, y: yValues, mode: "lines"}];
+    const layout = {title: "Sinal de Entrada",};
+    Plotly.newPlot("graficoSinalEntrada", data, layout, {displayModeBar: false, scrollZoom: true});
 
     autoEscala("graficoSinalEntrada");
 }
@@ -131,13 +168,13 @@ function iniciarGraficoFaseEntrada(){
     autoEscala("graficoFaseEntrada");
 }
 
-function iniciarGraficoAmpliCanal(){
+async function iniciarGraficoAmpliCanal() {
+    let frequencias = {
+        frequenciaInicialDoCanal: parseFloat(document.querySelector("#f2").value),
+        frequenciaFinalDoCanal: parseFloat(document.querySelector("#f2").value)
+    }
 
-    let f2 = parseFloat(document.querySelector("#f2").value);
-    let f3 = parseFloat(document.querySelector("#f3").value);
-
-    let exp = "(1/ "+ f2 +")*(x/Math.sqrt((1+(Math.pow((x/"+ f2 +"),2)))*(1+(Math.pow((x/"+ f3 +"),2)))))";
-
+    let exp = await obterExpressao('amplitude-canal', frequencias);
     // Generate values
     const xValues = [];
     const yValues = [];
@@ -147,18 +184,20 @@ function iniciarGraficoAmpliCanal(){
     }
 
     // Display using Plotly
-    const data = [{x:xValues, y:yValues, mode:"lines"}];
-    const layout = { title: "Amplitude do Canal",};
-    Plotly.newPlot("graficoAmpliCanal", data, layout, {displayModeBar:false, scrollZoom: true});
+    const data = [{x: xValues, y: yValues, mode: "lines"}];
+    const layout = {title: "Amplitude do Canal",};
+    Plotly.newPlot("graficoAmpliCanal", data, layout, {displayModeBar: false, scrollZoom: true});
 
     autoEscala("graficoAmpliCanal");
 }
 
-function iniciarGraficoFaseCanal(){
-    let f2 = parseFloat(document.querySelector("#f2").value);
-    let f3 = parseFloat(document.querySelector("#f3").value);
+async function iniciarGraficoFaseCanal() {
+    let frequencias = {
+        frequenciaInicialDoCanal: parseFloat(document.querySelector("#f2").value),
+        frequenciaFinalDoCanal: parseFloat(document.querySelector("#f2").value)
+    }
 
-    let exp = "((-Math.PI/2) - Math.atan((x*("+ (f2 + f3) +"))/( "+ (f2*f3) +" - Math.pow(x,2))))*(180/Math.PI)";
+    let exp = await obterExpressao('fase-canal', frequencias);
 
     // Generate values
     const xValues = [];
@@ -169,25 +208,22 @@ function iniciarGraficoFaseCanal(){
     }
 
     // Display using Plotly
-    const data = [{x:xValues, y:yValues, mode:"lines"}];
-    const layout = { title: "Fase do Canal",};
-    Plotly.newPlot("graficoFaseCanal", data, layout, {displayModeBar:false, scrollZoom: true});
+    const data = [{x: xValues, y: yValues, mode: "lines"}];
+    const layout = {title: "Fase do Canal",};
+    Plotly.newPlot("graficoFaseCanal", data, layout, {displayModeBar: false, scrollZoom: true});
 
     autoEscala("graficoFaseCanal");
 }
 
-function iniciarGraficoSinalSaida(){
+async function iniciarGraficoSinalSaida() {
 
-    let f1 = parseFloat(document.querySelector("#f1").value);
-    let f2 = parseFloat(document.querySelector("#f2").value);
-    let f3 = parseFloat(document.querySelector("#f3").value);
+    let frequencias = {
+        frequenciaDoSinal: parseFloat(document.querySelector("#f1").value),
+        frequenciaInicialDoCanal: parseFloat(document.querySelector("#f2").value),
+        frequenciaFinalDoCanal: parseFloat(document.querySelector("#f2").value)
+    }
 
-    var funcG = (1/f2)*(f1/Math.sqrt((1+(Math.pow((f1/f2),2)))*(1+(Math.pow((f1/f3),2)))));
-    var funcFase = ((-Math.PI/2) - Math.atan((f1*(f2 + f3))/((f2*f3)- Math.pow(f1,2))))*(180/Math.PI);
-
-    let exp = funcG + "*Math.abs(Math.sin(2*Math.PI*" + f1 + "* x +"+ funcFase +"))";
-    console.log(exp);
-
+    let exp = await obterExpressao('sinal-saida', frequencias);
     // Generate values
     const xValues = [];
     const yValues = [];
@@ -197,9 +233,9 @@ function iniciarGraficoSinalSaida(){
     }
 
     // Display using Plotly
-    const data = [{x:xValues, y:yValues, mode:"lines"}];
-    const layout = { title: "Sinal de Saída",};
-    Plotly.newPlot("graficoSinalSaida", data, layout, {displayModeBar:false, scrollZoom: true});
+    const data = [{x: xValues, y: yValues, mode: "lines"}];
+    const layout = {title: "Sinal de Saída",};
+    Plotly.newPlot("graficoSinalSaida", data, layout, {displayModeBar: false, scrollZoom: true});
 
     autoEscala("graficoSinalSaida");
 }
@@ -270,26 +306,68 @@ function iniciarGraficoFaseSaida(){
     Plotly.newPlot("graficoFaseSaida", data, layout, {displayModeBar:false, scrollZoom: true});
 }
 
-iniciarGraficoSinalEntrada();
-iniciarGraficoAmplitudeEntrada();
-iniciarGraficoFaseEntrada();
-iniciarGraficoAmpliCanal();
-iniciarGraficoFaseCanal();
-iniciarGraficoSinalSaida();
-iniciarGraficoAmplitudeSaida();
-iniciarGraficoFaseSaida();
+function toggleVisible(id, classe) {
+    let div = document.getElementById(id);
+    div.classList.toggle(classe);
+}
 
-function atualizarSinalGrafico() {
-    setTimeout(function(){
-        iniciarGraficoSinalEntrada();
-        iniciarGraficoAmplitudeEntrada();
-        iniciarGraficoFaseEntrada();
-        iniciarGraficoAmpliCanal();
-        iniciarGraficoFaseCanal();
-        iniciarGraficoSinalSaida();
-        iniciarGraficoAmplitudeSaida();
-        iniciarGraficoFaseSaida();
-    }, 200);
+function hidden(id) {
+    let div = document.getElementById(id);
+    if (!div.classList.contains("d-none")) {
+        div.classList.add("d-none");
+    }
+}
+
+function show(id) {
+    let div = document.getElementById(id);
+    if (div.classList.contains("d-none")) {
+        div.classList.remove("d-none");
+    }
+}
+function visibleHidden(id) {
+    let div = document.getElementById(id);
+    if (!div.classList.contains("visible-none")) {
+        div.classList.add("visible-none");
+    }
+}
+
+function isValid(){
+    let f1 = document.querySelector("#f1").value;
+    let f2 = document.querySelector("#f2").value;
+    let f3 = document.querySelector("#f3").value;
+    const values = [f1,f2,f3];
+
+    if(values.includes('')){
+        notyf.error('Preencha todas as frequencias');
+        return false;
+    }
+    if(Number(f2) > Number(f3)){
+        notyf.error('Frequência inicial do canal não pode ser maior que a final');
+        return false;
+    }
+    return  true;
+
+}
+
+async function calcular(){
+    if(!isValid()){
+        show("empty");
+        visibleHidden("content")
+        return;
+    }
+    hidden("empty");
+    toggleVisible("loading", "d-none");
+    toggleVisible("content","visible-none");
+    await iniciarGraficoSinalEntrada();
+    iniciarGraficoAmplitudeEntrada();
+    iniciarGraficoFaseEntrada();
+    await iniciarGraficoAmpliCanal();
+    await iniciarGraficoFaseCanal();
+    await iniciarGraficoSinalSaida();
+    iniciarGraficoAmplitudeSaida();
+    iniciarGraficoFaseSaida();
+    toggleVisible("loading","d-none");
+    toggleVisible("content","visible-none");
 }
 
 function autoEscala(grafico) {

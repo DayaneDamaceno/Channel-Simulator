@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="/lib/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link rel="stylesheet" href="/css/home.css">
 </head>
 
@@ -26,17 +27,19 @@
 
         <div class="form-control">
             <label for="f1">Frequência do sinal</label>
-            <input type="number" name="f1" id="f1" onkeydown="atualizarSinalGrafico()" value="1" />
+            <input type="number" name="f1" id="f1"  value="1" />
         </div>
 
         <div class="form-control">
             <label for="f2">Frequência inicial do canal</label>
-            <input type="number" name="f2" id="f2" onkeydown="atualizarSinalGrafico()" value="1"/>
+            <input type="number" name="f2" id="f2"  value="1"/>
         </div>
         <div class="form-control">
             <label for="f3">Frequência final do canal</label>
-            <input type="number" name="f3" id="f3" onkeydown="atualizarSinalGrafico()" value="1"/>
+            <input type="number" name="f3" id="f3"  value="1"/>
         </div>
+
+        <button class="btn" onclick="calcular()" type="button">Calcular</button>
     </form>
 
     <div class="credits">
@@ -50,7 +53,16 @@
     </div>
 </div>
 
-<main>
+<div id="empty">
+    <img src="/images/empty.svg" alt="">
+    <p>Preencha as frequencias necessarias para simular um canal passa faixas</p>
+</div>
+
+<div id="loading" class="d-none">
+    <img src="/images/bars.svg">
+</div>
+
+<div id="content" >
     <div id="graficoSinalEntrada" class="graphic"></div>
     <div id="graficoAmplitudeEntrada" class="graphic"></div>
     <div id="graficoFaseEntrada" class="graphic"></div>
@@ -59,8 +71,8 @@
     <div id="graficoSinalSaida" class="graphic"></div>
     <div id="graficoAmplitudeSaida" class="graphic"></div>
     <div id="graficoFaseSaida" class="graphic"></div>
-</main>
-
+</div>
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script src="/js/graphics.js"></script>
 </body>
 </html>

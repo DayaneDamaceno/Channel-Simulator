@@ -352,12 +352,12 @@ function isValid(){
 async function calcular(){
     if(!isValid()){
         show("empty");
-        visibleHidden("content")
+        visibleHidden("content");
         return;
     }
     hidden("empty");
     toggleVisible("loading", "d-none");
-    toggleVisible("content","visible-none");
+    visibleHidden("content");
     await iniciarGraficoSinalEntrada();
     iniciarGraficoAmplitudeEntrada();
     iniciarGraficoFaseEntrada();

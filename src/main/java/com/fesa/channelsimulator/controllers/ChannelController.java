@@ -9,12 +9,15 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 public class ChannelController {
+
+    //Controller responsável por carregar a página inicial (home)
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
 
         return "home";
     }
 
+    //Controller responsável por retornar o sinal de entrada
     @RequestMapping(value = "/expressao/sinal-entrada", method = RequestMethod.GET)
     public @ResponseBody Map<String, String> obterExpressaoSinalDeEntrada(@RequestParam Float frequenciaDoSinal) {
         Map<String, String> response = new HashMap<>();
@@ -22,6 +25,7 @@ public class ChannelController {
         return response;
     }
 
+    //Controller responsável por retornar a amplitude do canal
     @RequestMapping(value = "/expressao/amplitude-canal", method = RequestMethod.GET)
     public @ResponseBody Map<String, String> obterExpressaoAmplitudeCanal(@RequestParam Float frequenciaInicialDoCanal, @RequestParam Float frequenciaFinalDoCanal) {
         Map<String, String> response = new HashMap<>();
@@ -29,6 +33,7 @@ public class ChannelController {
         return response;
     }
 
+    //Controller responsável por retornar a fase do canal
     @RequestMapping(value = "/expressao/fase-canal", method = RequestMethod.GET)
     public @ResponseBody Map<String, String> obterExpressaoFaseCanal(@RequestParam Float frequenciaInicialDoCanal, @RequestParam Float frequenciaFinalDoCanal) {
         Map<String, String> response = new HashMap<>();
@@ -36,6 +41,7 @@ public class ChannelController {
         return response;
     }
 
+    //Controller responsável por retornar o sinal de saida
     @RequestMapping(value = "/expressao/sinal-saida", method = RequestMethod.GET)
     public @ResponseBody Map<String, String> obterExpressaoSinalSaida(@RequestParam Float frequenciaDoSinal, @RequestParam Float frequenciaInicialDoCanal, @RequestParam Float frequenciaFinalDoCanal) {
         Map<String, String> response = new HashMap<>();

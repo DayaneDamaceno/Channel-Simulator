@@ -1,9 +1,12 @@
+//Objeto responsável pela notificação de erro
 var notyf = new Notyf({
     duration: 5000,
     position: {
         x: 'right',
         y: 'top',
     },});
+
+//Função responsável por chamar a controller e retornar a expressão matemática
 async function obterExpressao(grafic, frequencias) {
     const params = criarQueryString(frequencias);
 
@@ -21,6 +24,7 @@ async function obterExpressao(grafic, frequencias) {
     }
 }
 
+//Função responsável por concatenar os parâmetros em uma URL
 function criarQueryString(obj) {
     var queryString = '';
     for (var key in obj) {
@@ -34,6 +38,7 @@ function criarQueryString(obj) {
     return queryString;
 }
 
+// Função responsável por chamar a controller da fórmula do sinal de entrada e preencher o gráfico
 async function iniciarGraficoSinalEntrada() {
 
     let frequencias = {
@@ -58,6 +63,7 @@ async function iniciarGraficoSinalEntrada() {
     autoEscala("graficoSinalEntrada");
 }
 
+// Função responsável por chamar a controller da fórmula do amplitude de entrada e preencher o gráfico
 function iniciarGraficoAmplitudeEntrada(){
 
     let f1 = parseFloat(document.querySelector("#f1").value);
@@ -103,6 +109,7 @@ function iniciarGraficoAmplitudeEntrada(){
     autoEscala("graficoAmplitudeEntrada");
 }
 
+// Função responsável por chamar a controller da fórmula do fase de entrada e preencher o gráfico
 function iniciarGraficoFaseEntrada(){
     let f1 = parseFloat(document.querySelector("#f1").value);
 
@@ -134,6 +141,7 @@ function iniciarGraficoFaseEntrada(){
     autoEscala("graficoFaseEntrada");
 }
 
+// Função responsável por chamar a controller da fórmula da amplitude do canal e preencher o gráfico
 async function iniciarGraficoAmpliCanal() {
     let frequencias = {
         frequenciaInicialDoCanal: parseFloat(document.querySelector("#f2").value),
@@ -157,6 +165,7 @@ async function iniciarGraficoAmpliCanal() {
     autoEscala("graficoAmpliCanal");
 }
 
+// Função responsável por chamar a controller da fórmula da fase do canal e preencher o gráfico
 async function iniciarGraficoFaseCanal() {
     let frequencias = {
         frequenciaInicialDoCanal: parseFloat(document.querySelector("#f2").value),
@@ -181,6 +190,7 @@ async function iniciarGraficoFaseCanal() {
     autoEscala("graficoFaseCanal");
 }
 
+// Função responsável por chamar a controller da fórmula do sinal de saída e preencher o gráfico
 async function iniciarGraficoSinalSaida() {
 
     let frequencias = {
@@ -209,6 +219,7 @@ async function iniciarGraficoSinalSaida() {
     autoEscala("graficoSinalSaida");
 }
 
+// Função responsável por chamar a controller da fórmula da amplitude de saida e preencher o gráfico
 function iniciarGraficoAmplitudeSaida(){
     let f1 = parseFloat(document.querySelector("#f1").value);
     let f2 = parseFloat(document.querySelector("#f2").value);
@@ -264,6 +275,7 @@ function iniciarGraficoAmplitudeSaida(){
     autoEscala("graficoAmplitudeSaida");
 }
 
+// Função responsável por chamar a controller da fórmula da fase de saida e preencher o gráfico
 function iniciarGraficoFaseSaida(){
     // Define Data
     let data = [];
@@ -329,6 +341,7 @@ function visibleHidden(id) {
     }
 }
 
+// Função responsável por validar os valores de frequência
 function isValid(){
     let f1 = document.querySelector("#f1").value;
     let f2 = document.querySelector("#f2").value;
@@ -347,6 +360,7 @@ function isValid(){
 
 }
 
+// Função responsável por chamar os grafico ao clicar no botão calcular
 async function calcular(){
     if(!isValid()){
         show("empty");
@@ -368,6 +382,7 @@ async function calcular(){
     toggleVisible("content","visible-none");
 }
 
+// Função responsável focar nos valores do grafico
 function autoEscala(grafico) {
     Plotly.relayout(grafico, {
         'xaxis.autorange': true,
@@ -375,6 +390,7 @@ function autoEscala(grafico) {
     });
 }
 
+// Função responsável por calcular a quantidade máxima de períodos do gráfico de senoide
 function loopMaxSenoide(frequencia) {
     let numero;
 
@@ -402,6 +418,7 @@ function loopMaxSenoide(frequencia) {
     return parseFloat(numero);
 }
 
+//Função responsável por calcular o menor valor inserido para o gráfico de senoide, evitando perda de desempenho
 function loopPercorrerSenoide(frequencia) {
     let numero;
 
@@ -429,6 +446,7 @@ function loopPercorrerSenoide(frequencia) {
     return parseFloat(numero);
 }
 
+// Função responsável por calcular a quantidade máxima de períodos do gráfico sem senoide
 function loopMaxSemSenoide(f2, f3) {
     let numero, frequencia;
 
@@ -458,6 +476,7 @@ function loopMaxSemSenoide(f2, f3) {
     return parseFloat(numero);
 }
 
+//Função responsável por calcular o menor valor inserido para o gráfico de sem senoide, evitando perda de desempenho
 function loopPercorrerSemSenoide(f2, f3) {
     let numero, frequencia;
 

@@ -337,7 +337,7 @@ function isValid(){
     let f3 = document.querySelector("#f3").value;
     const values = [f1,f2,f3];
 
-    if(values.includes('')){
+    if(values.includes('') || values.includes('0')){
         notyf.error('Preencha todas as frequencias');
         return false;
     }

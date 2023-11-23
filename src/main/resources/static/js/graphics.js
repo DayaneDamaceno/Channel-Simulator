@@ -119,7 +119,7 @@ function iniciarGraficoFaseEntrada(){
     for (let k = 0; k <= 50; k += 1) {
         data.push({
             x: [k*f1, k*f1],
-            y: [0, 0],
+            y: [0, 180],
             showlegend: false,
             name:"N = " + k,
             //marker: {color: ['red']},
@@ -294,7 +294,7 @@ function iniciarGraficoFaseSaida(){
 
         data.push({
             x: [frequenciaX, frequenciaX],
-            y: [eval(exp), eval(exp)],
+            y: [0, eval(exp) + 180],
             showlegend: false,
             name:"N = " + k,
             //marker: {color: ['red']},

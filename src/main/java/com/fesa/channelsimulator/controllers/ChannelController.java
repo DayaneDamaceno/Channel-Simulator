@@ -9,12 +9,15 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 public class ChannelController {
+
+    //Controller responsável por carregar a página inicial (home)
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
 
         return "home";
     }
 
+    //Controller responsável por retornar o sinal de entrada
     @RequestMapping(value = "/expressao/sinal-entrada", method = RequestMethod.GET)
     public @ResponseBody Map<String, String> obterExpressaoSinalDeEntrada(@RequestParam Float frequenciaDoSinal) {
         Map<String, String> response = new HashMap<>();
@@ -22,6 +25,7 @@ public class ChannelController {
         return response;
     }
 
+    //Controller responsável por retornar a amplitude do canal
     @RequestMapping(value = "/expressao/amplitude-canal", method = RequestMethod.GET)
     public @ResponseBody Map<String, String> obterExpressaoAmplitudeCanal(@RequestParam Float frequenciaInicialDoCanal, @RequestParam Float frequenciaFinalDoCanal) {
         Map<String, String> response = new HashMap<>();
@@ -29,6 +33,7 @@ public class ChannelController {
         return response;
     }
 
+    //Controller responsável por retornar a fase do canal
     @RequestMapping(value = "/expressao/fase-canal", method = RequestMethod.GET)
     public @ResponseBody Map<String, String> obterExpressaoFaseCanal(@RequestParam Float frequenciaInicialDoCanal, @RequestParam Float frequenciaFinalDoCanal) {
         Map<String, String> response = new HashMap<>();
@@ -36,14 +41,15 @@ public class ChannelController {
         return response;
     }
 
+    //Controller responsável por retornar o sinal de saida
     @RequestMapping(value = "/expressao/sinal-saida", method = RequestMethod.GET)
     public @ResponseBody Map<String, String> obterExpressaoSinalSaida(@RequestParam Float frequenciaDoSinal, @RequestParam Float frequenciaInicialDoCanal, @RequestParam Float frequenciaFinalDoCanal) {
         Map<String, String> response = new HashMap<>();
 
-        var funcG = String.format("(1/%2$f)*(%1$f/Math.sqrt((1+(Math.pow((%1$f/%2$f),2)))*(1+(Math.pow((%1$f/%3$f),2)))))", frequenciaDoSinal, frequenciaInicialDoCanal, frequenciaFinalDoCanal);
-        var funcFase = String.format("((-Math.PI/2) - Math.atan((%1$f*(%2$f + %3$f))/((%2$f*%3$f)- Math.pow(%1$f,2))))*(180/Math.PI)", frequenciaDoSinal, frequenciaInicialDoCanal, frequenciaFinalDoCanal);
+        var funcG = "(1/" + frequenciaInicialDoCanal + ")*(" + frequenciaDoSinal + "/Math.sqrt((1+(Math.pow((" + frequenciaDoSinal + "/" + frequenciaInicialDoCanal + "),2)))*(1+(Math.pow((" + frequenciaDoSinal + "/" + frequenciaFinalDoCanal + "),2)))))";
+        var funcFase = "((-Math.PI/2) - Math.atan((" + frequenciaDoSinal + "*(" + frequenciaInicialDoCanal + " + " + frequenciaFinalDoCanal + "))/((" + frequenciaInicialDoCanal + "*" + frequenciaFinalDoCanal + ")- Math.pow(" + frequenciaDoSinal + ",2))))*(180/Math.PI)";
 
-        response.put("expressao", funcG + "*Math.abs(Math.sin(2*Math.PI*" + frequenciaDoSinal + "* x +"+ funcFase +"))");
+        response.put("expressao", "(" +funcG + ")*Math.abs(Math.sin(2*Math.PI*(" + frequenciaDoSinal + ")* x +("+ funcFase +")))");
 
         return response;
     }

@@ -7,6 +7,43 @@
     box-sizing: border-box;
 }
 
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+figure,
+blockquote,
+dl,
+dd,
+form,
+fieldset,
+legend,
+input,
+textarea,
+button,
+select {
+    margin: 0;
+    padding: 0;
+}
+
+/* Remover decoração de listas */
+ul,
+ol {
+    list-style: none;
+}
+
+/* Remover decoração de hiperlinks */
+a {
+    text-decoration: none;
+    color: inherit; /* Garante a herança da cor do texto */
+}
+
 /* Oculta o botão up e down do input number */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -112,13 +149,13 @@ form{
     align-items: flex-start;
     gap: 16px;
 }
-.form-control{
+.control{
     display: flex;
     width: 100%;
     flex-direction: column;
     gap: 4px;
 }
-.form-control input{
+.control input{
     display: flex;
     width: 100%;
     padding: 10px;

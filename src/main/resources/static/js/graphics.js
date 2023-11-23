@@ -4,6 +4,7 @@ var notyf = new Notyf({
         x: 'right',
         y: 'top',
     },});
+
 async function obterExpressao(grafic, frequencias) {
     const params = criarQueryString(frequencias);
 

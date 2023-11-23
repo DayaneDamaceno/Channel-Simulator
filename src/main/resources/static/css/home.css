@@ -164,8 +164,41 @@ form{
     align-items: flex-start;
     gap: 10px;
     align-self: stretch;
-    border-radius: 5px;
     background: #29292D;
+    text-align: right;
+    color: #fff;
+}
+html{
+    position: relative;
+}
+.help{
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    z-index: 9000;
+    border-radius: 100px !important;
+    font-size: 24px !important;
+    padding: 0px !important;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px !important;
+    height: 26px;
+}
+
+.group-control{
+    background: #29292D;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+    justify-content: space-between;
+}
+.group-control-text{
+    padding: 10px;
+    height: 100%;
+    background: #45454b;
     color: #fff;
 }
 .credits, .names{

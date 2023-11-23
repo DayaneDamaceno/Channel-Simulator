@@ -364,12 +364,12 @@ function isValid(){
 async function calcular(){
     if(!isValid()){
         show("empty");
-        visibleHidden("content");
+        hidden("content");
         return;
     }
     hidden("empty");
     toggleVisible("loading", "d-none");
-    visibleHidden("content");
+    hidden("content");
     await iniciarGraficoSinalEntrada();
     iniciarGraficoAmplitudeEntrada();
     iniciarGraficoFaseEntrada();
@@ -379,7 +379,7 @@ async function calcular(){
     iniciarGraficoAmplitudeSaida();
     iniciarGraficoFaseSaida();
     toggleVisible("loading","d-none");
-    toggleVisible("content","visible-none");
+    toggleVisible("content","d-none");
 }
 
 // Função responsável focar nos valores do grafico
